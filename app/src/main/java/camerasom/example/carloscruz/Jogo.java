@@ -1,7 +1,6 @@
 package camerasom.example.carloscruz;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,16 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
-
 import java.util.Random;
-
 
 
 public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
@@ -60,7 +53,7 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
     public Jogo(Context context) {
         super(context);
 
-        
+
         SharedPreferences pref = context.getSharedPreferences("Key", Context.MODE_PRIVATE);
         Constantes.recorde = pref.getInt("Recorde", 0);
 
@@ -187,8 +180,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
 
     //Dar update ao canvas
     public void update() {
-
-
 
         //Se não houver colisão
         if(!gameOver) {
