@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -46,6 +47,7 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
     //Variavel para o tempo da orientação
     private long tempo;
 
+    SharedPreferences sharedpreferences;
 
     Context context;
 
@@ -53,12 +55,11 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
     public Jogo(Context context) {
         super(context);
 
-
-        SharedPreferences pref = context.getSharedPreferences("Key", Context.MODE_PRIVATE);
-        Constantes.recorde = pref.getInt("Recorde", 0);
-
         //Guardar imagem na variavel
         mCustomImage = context.getResources().getDrawable(R.drawable.background);
+
+        sharedpreferences = context.getSharedPreferences("myprefs", Context.MODE_PRIVATE);
+        Constantes.recorde= sharedpreferences.getInt("key", 0);
 
         //acesso à superfície subjacente
         getHolder().addCallback(this);
@@ -246,6 +247,8 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
                 gameOverTime = System.currentTimeMillis();
             }
         }
+
+
     }
 
     //Função para desenhar o jogo no canvas
@@ -262,11 +265,12 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         player.draw(canvas);
         ObstacleManager.draw(canvas);
 
-
-
         //Mostrar canvas mesmo quando perde
         if(gameOver){
 
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putInt("key", Constantes.recorde);
+            editor.apply();
 
             //Criar nova Pintura
             Paint paintStroke = new Paint();
@@ -314,7 +318,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paint);
 
     }
-
     private void textoCentradoStroke(Canvas canvas, Paint paintStroke, String text) {
         //Definir o texto a esquerda
         paintStroke.setTextAlign(Paint.Align.LEFT);
@@ -329,7 +332,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paintStroke);
 
     }
-
     private void textoCentradoPlus(Canvas canvas, Paint paint, String text) {
         //Definir o texto a esquerda
         paint.setTextAlign(Paint.Align.LEFT);
@@ -343,7 +345,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paint);
 
     }
-
     private void textoCentradoPlusStroke(Canvas canvas, Paint paintStroke, String text) {
         //Definir o texto a esquerda
         paintStroke.setTextAlign(Paint.Align.LEFT);
@@ -370,7 +371,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paint);
 
     }
-
     private void textoCentradoPontosStroke(Canvas canvas, Paint paintStroke, String text) {
         //Definir o texto a esquerda
         paintStroke.setTextAlign(Paint.Align.LEFT);
@@ -384,7 +384,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paintStroke);
 
     }
-
     private void textoCentradoRecorde(Canvas canvas, Paint paint, String text) {
         //Definir o texto a esquerda
         paint.setTextAlign(Paint.Align.LEFT);
@@ -398,7 +397,6 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paint);
 
     }
-
     private void textoCentradoRecordeStroke(Canvas canvas, Paint paintStroke, String text) {
         //Definir o texto a esquerda
         paintStroke.setTextAlign(Paint.Align.LEFT);
@@ -412,8 +410,4 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(text, x, y, paintStroke);
 
     }
-
-
-
-
 }

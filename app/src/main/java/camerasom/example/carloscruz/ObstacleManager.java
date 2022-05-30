@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -22,9 +23,8 @@ public class ObstacleManager {
 
     Context context;
 
+
     public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color) {
-
-
 
         this.playerGap = playerGap;
         this.obstacleGap = obstacleGap;
@@ -59,6 +59,8 @@ public class ObstacleManager {
     }
 
     public void update() {
+
+
         if(startTime < Constantes.INIT_TIME)
             startTime = Constantes.INIT_TIME;
         //Log.e("teste", "ObsUpdate");
@@ -84,22 +86,20 @@ public class ObstacleManager {
 
         for(JogoObstaculos ob : obstacles)
             ob.draw(canvas);
-        Paint paint = new Paint();
-        paint.setTextSize(120);
-        paint.setColor(Color.WHITE);
-        canvas.drawText(""+ Constantes.pontos, 100, 100 + paint.descent() - paint.ascent(), paint);
 
         if(Constantes.pontos > Constantes.recorde){
 
             Constantes.recorde = Constantes.pontos;
 
-            SharedPreferences prefs = context.getSharedPreferences("key", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
 
-            editor.putInt("Recorde", Constantes.recorde);
-            editor.commit();
 
         }
+
+        Paint paint = new Paint();
+        paint.setTextSize(120);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(""+ Constantes.pontos, 100, 100 + paint.descent() - paint.ascent(), paint);
+
     }
 }
 
