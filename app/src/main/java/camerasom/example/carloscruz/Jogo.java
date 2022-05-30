@@ -17,14 +17,12 @@ import java.util.Random;
 
 public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
 
-
     //Receber valor da classe JogoThread
     private JogoThread thread;
     //receber valor da classe ObstacleManager
     private ObstacleManager ObstacleManager;
     //Criar um novo Rectangulo r para a função centrar Texto
     private Rect r = new Rect();
-
 
     // Novo jogador
     private Jogador player;
