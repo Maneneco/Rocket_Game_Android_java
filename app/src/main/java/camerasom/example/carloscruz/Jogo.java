@@ -25,6 +25,7 @@ public class Jogo extends SurfaceView implements SurfaceHolder.Callback {
     //Criar um novo Rectangulo r para a função centrar Texto
     private Rect r = new Rect();
 
+
     // Novo jogador
     private Jogador player;
     //Nova posição do jogador
