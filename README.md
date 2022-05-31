@@ -31,3 +31,4 @@ Animação de explosão na colisão -- doing
 Guardar as pontuações do recorde localmente -- Done
 Nome do curso -- Paused
 Suavisar movimento das barreiras -- Problematic - Paused
+Depois de certos pontos muda o sistema de geração de obstaculos - Thinking
